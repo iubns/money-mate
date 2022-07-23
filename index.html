@@ -37,7 +37,7 @@
     for([name, value] of Object.entries(userList).sort( ([,a], [,b]) => b.point - a.point )){
         const tableRow = document.createElement('table-row')
         tableRow.setAttribute('number', index++)
-        tableRow.setAttribute('image', image[name])
+        tableRow.setAttribute('image', image[name] || 'blank.png')
         tableRow.setAttribute('name', name)
         tableRow.setAttribute('point', value.point)
         tableRow.setAttribute('victoryDay', value.victoryDay)
