@@ -31,7 +31,23 @@ class TableRow extends HTMLElement {
         return this.getAttribute('victoryDay')
     }
     
-    
+    numberArea (number){
+        if(number <= 3)
+        {
+            const imageNames = ['1st', '2nd', '3rd']
+            return `
+            <div style='width: 12%;'>
+                <img 
+                    src='./img/${imageNames[number - 1]}.png' 
+                    height='38'
+                />
+            </div>`
+        }
+        return `
+        <span style='font-size: 1.2rem; width: 12%;'>
+            ${number}
+        </span>`
+    }
 
     render() {
         this.innerHTML = `
@@ -43,10 +59,17 @@ class TableRow extends HTMLElement {
                 height: 40px;
             "
         >
-            <span style='font-size: 1.2rem; width: 12%;'>
-                ${this.number}
-            </span>
+            ${this.numberArea(this.number)}
+            
             <div style='width: 20%;'>
+                ${this.number === '1' ? 
+                    `<img 
+                        src='./img/crown.png' 
+                        style='position:fixed; margin-top: -17px'
+                        width='32'
+                        height='32'
+                    />` : ''
+                }
                 <img
                     style='border-radius: 35px;margin-top:4px' 
                     width='32' height='32' src='./img/${this.image}' />

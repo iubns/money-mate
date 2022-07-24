@@ -5,6 +5,9 @@
         <title>money-mate</title>
     </head> 
     <body>
+        <div class="title">
+            2022년 7월 머니메이트 랭킹
+        </div>
         <div id="table" class="table"/>
     </body>
       <script src="./components/TableRow.js"> </script> 
@@ -22,7 +25,7 @@
     const test = Object.values(userData).map(dayData => {
         for([key, value] of Object.entries(dayData)) {
             if(!userList[key]){
-                userList[key] ={
+                userList[key] = {
                     point: value,
                     victoryDay: value === 3 ? 1 : 0
                 }
@@ -43,7 +46,6 @@
         tableRow.setAttribute('victoryDay', value.victoryDay)
         table.appendChild(tableRow)
     }
-    console.log(userList )
 
 </script>
 
@@ -54,14 +56,18 @@
         padding-right: 6px;
         text-align: center;
     }
+    .title{
+        font-size: 18px;
+        margin: 16px;
+        color: #2B2B2B;
+    }
     .table{
         background-color: white;
         border-radius: 4px;
-        padding-top: 10px;
+        padding-top: 15px;
     }
     span {
-        
-  display: inline-block;
-  vertical-align: middle;
+        display: inline-block;
+        vertical-align: middle;
     }
 </style>
