@@ -65,13 +65,13 @@ class TableRow extends HTMLElement {
                 ${this.number === '1' ? 
                     `<img 
                         src='./img/crown.png' 
-                        style='position:fixed; margin-top: -17px'
+                        style='position:absolute; margin-top: -17px; z-index: 1;'
                         width='32'
                         height='32'
                     />` : ''
                 }
                 <img
-                    style='border-radius: 35px;margin-top:4px' 
+                    style='border-radius: 35px;margin-top: 5px;z-index: 10;position: relative;' 
                     width='32' height='32' src='./img/${this.image}' />
             </div>
             <span style='

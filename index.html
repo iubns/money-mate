@@ -5,24 +5,22 @@
         <title>money-mate</title>
     </head> 
     <body>
-        <div class="title">
-            2022년 7월 머니메이트 랭킹
-        </div>
-        <div id="table" class="table"/>
+        <div class="title" id="title" ></div>
+        <div id="table" class="table"></div>
     </body>
       <script src="./components/TableRow.js"> </script> 
       <script src="./data.js"></script>
 </html>
 
 <script>
-    const table = document.getElementById('table')
-
-    const allUserNames = Object.values(userData).map(userList => Object.keys(userList)).flat()
-    const userD = new Set(allUserNames)
+    const titleElement = document.getElementById('title')
+    const date = new Date()
+    titleElement.innerText = `${date.getFullYear()}년 ${date.getMonth() + 1}월 머니메이트 랭킹`
 
     const userList = {}
 
-    const test = Object.values(userData).map(dayData => {
+    Object.entries(userData).filter(([key,_]) => key.startsWith(`${date.getFullYear()}.${date.getMonth()+1}`))
+        .map(([_, dayData]) => {
         for([key, value] of Object.entries(dayData)) {
             if(!userList[key]){
                 userList[key] = {
@@ -36,7 +34,10 @@
         }
     })
 
+
+    const table = document.getElementById('table')
     let index = 1;
+
     for([name, value] of Object.entries(userList).sort( ([,a], [,b]) => b.point - a.point )){
         const tableRow = document.createElement('table-row')
         tableRow.setAttribute('number', index++)
