@@ -17,12 +17,13 @@
 <script>
     const titleElement = document.getElementById('title')
     const date = new Date()
-    titleElement.innerText = `${date.getFullYear()}년 ${date.getMonth() + 1}월 머니메이트 랭킹`
+    titleElement.innerHTML = `${date.getFullYear()}년 ${getMothSelect().outerHTML}월 머니메이트 랭킹`
 
     const userList = {}
+    let selectedMonth = date.getMonth()+1
 
     Object.entries(userData)
-        .filter(([day, _]) => day.startsWith(`${date.getFullYear()}.${date.getMonth()+1}`))
+        .filter(([day, _]) => day.startsWith(`${date.getFullYear()}.${selectedMonth}`))
         .map(([day, dayData]) => {
         for([name, point] of Object.entries(dayData)) {
             if(!userList[name]){
@@ -41,6 +42,28 @@
         }
     })
 
+
+    console.log(getMonthList())
+
+    function getMonthList(year = 2022) {
+        const dateList = Object.keys(userData).map(date => date.split('.').slice(0,2).join('.'))
+        const thisYearDays = dateList.filter(date => date.startsWith(year))
+        const thisYearMnths = thisYearDays.map(date => date.split('.').slice(1,2))
+        const uniqDateList = new Array(...new Set(...thisYearMnths))
+        return uniqDateList
+    }
+
+    function getMothSelect() {
+        const selectElement = document.createElement('select')
+        getMonthList().map(month => {
+            const monthOption = document.createElement('option')
+            monthOption.value = month
+            monthOption.innerText = month
+            selectElement.appendChild(monthOption)
+        })
+        selectElement.onchange += (event) => {console.log(event)}
+        return selectElement
+    }
 
     const table = document.getElementById('table')
     let index = 0;
