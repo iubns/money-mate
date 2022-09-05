@@ -54,7 +54,6 @@
         const dateList = Object.keys(userData).map(date => date.split('.').slice(0,2).join('.'))
         const thisYearDays = dateList.filter(date => date.startsWith(year))
         const thisYearMnths = thisYearDays.map(date => date.split('.').slice(1,2)[0])
-        thisYearMnths.push(date.getMonth()+1)
         const uniqDateList = new Array(...new Set(thisYearMnths))
         return uniqDateList
     }
